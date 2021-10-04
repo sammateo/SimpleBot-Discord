@@ -7,44 +7,10 @@ import pip._vendor.requests as requests
 load_dotenv()  # take environment variables from .env.
 
 
-client = discord.Client()
 bot = commands.Bot(command_prefix='!')
 
 
-@client.event
-async def on_ready():
-    print('Bot is online')
-
-
-@client.event
-async def on_message(message):
-    if message.author == client.user:  # If it is not the bot that reacted
-        return
-
-    if message.content == 'hello' or message.content == 'Hello':
-        await message.channel.send(
-            f'{message.author}, welcome to the Testing Grounds'
-        )
-
-    if message.content == 'cool':
-        await message.add_reaction('\U0001F60E')
-
-
-@client.event
-async def on_message_edit(before, after):
-    await before.channel.send(
-        f'{before.author} changed {before.content} to {after.content}'
-    )
-
-
-@client.event
-async def on_reaction_add(reaction, user):
-
-    if(reaction.message.author != client.user):  # If it is not the bot that reacted
-        await reaction.message.channel.send(
-            f'{user} reacted with {reaction.emoji}'
-        )
-
+#
 
 @bot.event
 async def on_ready():
@@ -62,7 +28,6 @@ async def solve(ctx, *arg):
         f'{eval(arg)}\n'
 
     )
-    # await ctx.send(f'Response : {eval(arg)}')
 
 
 @bot.command()
@@ -74,6 +39,9 @@ async def info(ctx):
         f'!solve exp - exp is a numerical expression to be solved using python operators (+,-,/,*,**)\n'
         f'!ping      - returns pong\n'
         f'!gender name - name is the name of a person. This command will try to predict the gender based on the name entered\n'
+        f'!fact        - Returns a Random Fact\n'
+        f'!define word - Returns the definition of <word> \n'
+        f'!bored - Returns an activity to cure your boredom \n'
     )
 
 
@@ -95,5 +63,44 @@ async def gender(ctx, arg):
     )
 
 
-# client.run(os.getenv("TOKEN"))
+@bot.command()
+async def fact(ctx):
+    url = "https://uselessfacts.jsph.pl/random.json?language=en"
+    response = requests.get(url)
+    response = response.json()
+    await ctx.send(
+
+        f'Fact: {response["text"]}\n'
+    )
+
+
+@bot.command()
+async def define(ctx, arg):
+    url = "https://api.dictionaryapi.dev/api/v2/entries/en/"+arg
+    response = requests.get(url)
+    response = response.json()
+    for res in response:
+
+        await ctx.send(
+
+            f'Word: {res["word"]}\n'
+            f'Definition: {res["meanings"][0]["definitions"][0]["definition"]}\n'
+            f'Phonetic: {res["phonetic"]}\n'
+            # f'Origin: {res["origin"] or None}\n'
+            f'Synonyms: {res["meanings"][0]["definitions"][0]["synonyms"]}\n'
+        )
+
+
+@bot.command()
+async def bored(ctx):
+    url = "http://www.boredapi.com/api/activity/"
+    response = requests.get(url)
+    response = response.json()
+
+    await ctx.send(
+
+        f'{response["activity"]}\n'
+    )
+
+
 bot.run(os.getenv("TOKEN"))
