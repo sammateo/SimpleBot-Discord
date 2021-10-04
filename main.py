@@ -51,37 +51,6 @@ async def on_ready():
 
 
 @bot.command()
-async def add(ctx, *args):
-    sum = 0
-    response = ""
-    for i in args:
-        response += i + " "
-        sum += int(i)
-    await ctx.send(f'Sum of {response}: {sum}')
-    # await ctx.send(f'{arg1} + {arg2} = {int(arg1) + int(arg2)}')
-
-
-@bot.command()
-async def mul(ctx, *args):
-    product = 1
-    response = ""
-    for i in args:
-        response += i + " "
-        product *= int(i)
-    await ctx.send(f'Product of {response} : {product}')
-
-
-@bot.command()
-async def div(ctx, *args):
-    quotient = float(args[0])
-    response = args[0] + " "
-    for i in range(1, len(args)):
-        response += args[i] + " "
-        quotient /= float(args[i])
-    await ctx.send(f'Quotient of {response} : {quotient}')
-
-
-@bot.command()
 async def solve(ctx, *arg):
     # ans = eval(arg)
     s = ''
