@@ -48,6 +48,7 @@ async def info(ctx):
         f'!css - Returns CSS boilerplate code \n'
         f'!cpp - Returns Cpp boilerplate code \n'
         f'!c - Returns C boilerplate code \n'
+        f'!cppbasics - Returns a file containing basic Cpp concepts'
     )
 
 
@@ -150,6 +151,13 @@ fruits = ["apple", "banana", "cherry"]
 for x in fruits:
     print(x){end} '''
             )
+
+
+@bot.command()
+async def cppbasics(ctx):
+    file = discord.File("./cppbasics.txt")
+    await ctx.send(file=file, content="Cpp Basics")
+
 
 keep_alive()
 bot.run(os.getenv("TOKEN"))

@@ -1,0 +1,118 @@
+//conditional loops
+while(condition)
+{
+
+}
+
+for forward
+for (condition // int i = lowest; 1 < highest ; i increment)
+{
+code st "i";    
+}
+
+for reverse
+for (condition // int i = highest; 1 < lowest ; i decrement//)
+{
+code st "i";
+}
+
+//if
+    
+if ( condition)
+{
+    code
+}
+
+// if else
+    
+if ( condition)
+{
+    code
+}
+else
+{
+    code
+}
+
+//if else
+if ( condition)
+{
+    code
+}
+else if
+{
+    code
+}
+else 
+{
+    code
+}
+
+//switch
+
+switch(condition) 
+{
+  case x:
+    //code
+    break;
+  case y:
+    //code 
+    break;
+  default: // refers to if no conditions are true
+    //code 
+}
+
+//insert node at head
+{
+Node* newnode = new Node(data to be stores)
+newnode->next = head;
+head = newnode;
+}
+
+//insert node at tail no tail pointer
+{
+  Node * ptr = head;
+  Node * end = new Node;
+
+  if (ptr == NULL) {
+    push_Front(data);
+  }
+
+  if (ptr -> getNext() == NULL) {
+    Node * added = new Node;
+    Node * temp = ptr -> getNext();
+    added -> setValue(data);
+    added -> setNext(temp);
+    ptr -> setNext(added);
+  } else {
+    while (ptr -> getNext() -> getNext() != NULL)
+      ptr = ptr -> getNext();
+
+    ptr = ptr -> getNext();
+    Node * added = new Node;
+    Node * temp = ptr -> getNext();
+    added -> setValue(data);
+    added -> setNext(temp);
+    ptr -> setNext(added);
+  }
+};    
+
+//class and function 
+{
+class Functions{
+    Functions{}() // constructor 
+    private: /access specifiers
+      // only callable in class
+    public:
+    // functon or variables calllable anywhere
+     
+    function_in_class(string data)[code);
+    
+    string function_out_class(string);
+}
+
+string Functions::function_out_class(string data)
+{
+    //code
+}
+}
