@@ -43,12 +43,14 @@ async def info(ctx):
         f'!gender name - name is the name of a person. This command will try to predict the gender based on the name entered\n'
         f'!fact        - Returns a Random Fact\n'
         f'!define word - Returns the definition of <word> \n'
+        f'!pronounce word - Returns the url to an mp3 of the word entered being pronounced correctly\n'
         f'!bored - Returns an activity to cure your boredom \n'
         f'!html - Returns Emmet html boilerplate code \n'
         f'!css - Returns CSS boilerplate code \n'
         f'!cpp - Returns Cpp boilerplate code \n'
         f'!c - Returns C boilerplate code \n'
-        f'!cppbasics - Returns a file containing basic Cpp concepts'
+        f'!cppbasics - Returns a file containing basic Cpp concepts\n'
+
     )
 
 
@@ -94,6 +96,20 @@ async def define(ctx, arg):
             f'Phonetic: {res["phonetic"]}\n'
             # f'Origin: {res["origin"] or None}\n'
             f'Synonyms: {res["meanings"][0]["definitions"][0]["synonyms"]}\n'
+        )
+
+
+@bot.command()
+async def pronounce(ctx, arg):
+    url = "https://api.dictionaryapi.dev/api/v2/entries/en/"+arg
+    response = requests.get(url)
+    response = response.json()
+    for res in response:
+        await ctx.send(
+
+            f'Word: {res["word"]}\n'
+            f'Phonetic: {res["phonetic"]}\n'
+            f'Pronounciation link: https:{res["phonetics"][0]["audio"]}'
         )
 
 
